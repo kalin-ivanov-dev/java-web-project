@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+crossorigin="anonymous">
+
+<meta charset="ISO-8859-1">
+<title>Game management system</title>
+</head>
+<body>
+	<div class="container">
+		<h1> Game Management System</h1>
+		<hr>
+		<h2>Update Game</h2>
+		<form  action="#" th:action="@{/saveGame}" th:object="${game}" method="POST">
+			<input type="text" th:field="*{gameName}" placeholder="Game Name" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{gameDeveloper}" placeholder="Game Developer" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{gamePublisher}" placeholder="Game Publisher" class="form-control mb-4 col-4">
+			<button type="submit" class="btn btn-info col-2">Update Game</button>
+		</form>
+
+	</div>
+</body>
+</html>

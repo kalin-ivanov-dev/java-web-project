@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+crossorigin="anonymous">
+
+<meta charset="ISO-8859-1">
+<title>Game management system</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navigation</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#"></a>
+      <a class="nav-item nav-link" href="#" sec::authorize="isAuthenticated()" th:href="@{/logout}" >Logout</a>
+    </div>
+  </div>
+</nav>
+
+
+<form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="GET"> 
+
+	<input type="serach" name="keyword" size="50" class="form-control mr-sm-2" placeholder="keyword" required/>
+	&nbsp;
+	<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
+	&nbsp;
+	<input type="submit" value="Clear" class="btn btn-outline-success my-2 my-sm-0" onclick="clearFilter()"/>
+</form>
+<div  class="container my-2">
+<h1>Games List</h1>
+
+
+
+<a th:href = "@{/showNewGameForm}" class="btn btn-primary btn-sm mb-3"> Add Game</a>
+<table border="1" class="table table-stripped talbe-responsive-md">
+	<thead>
+		<tr>
+			<th>Game Name</th>
+			<th>Game Developer</th>
+			<th>Game Publisher</th>
+			<th>Actions </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="game : ${listGames}">
+			<td th:text="${game.gameName}"></td>
+			<td th:text="${game.gameDeveloper}"></td>
+			<td th:text="${game.gamePublisher}"></td>
+			<td>
+			<a th:href="@{/showFormForUpdate/{id}(id=${game.id})}" class="btn btn-primary">Update</a>
+			<a th:href="@{/deleteGame/{id}(id=${game.id})}" class="btn btn-danger">Delete</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="container">
+		Welcome <span sec:authentication="principal.username">User</span>
+</div>
+
+</body>
+<script type="text/javascript"> 
+		function clearFilter()
+		{
+			window.location= '/';
+		}
+
+</script>
+</html>
